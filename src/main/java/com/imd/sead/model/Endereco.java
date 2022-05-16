@@ -1,27 +1,29 @@
 package com.imd.sead.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "PESSOA_ENDERECO")
-@NoArgsConstructor
-public class PessoaEndereco implements Serializable {
+@Table(name = "ENDERECO")
+public class Endereco implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,22 +43,13 @@ public class PessoaEndereco implements Serializable {
     private String cidade;
     @Column(name = "CEP")
     private String cep;
-    @Column(name = "FONE")
-    private String fone;
-    @Column(name = "MUNICIPIO_IBGE")
-    private Integer municipioIbge;
     @Column(name = "UF")
     private String uf;
-    @Column(name = "PRINCIPAL")
-    private String principal;
-    @Column(name = "CORRESPONDENCIA")
-    private String correspondencia;
-    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Pessoa pessoa;
+    @ManyToMany(mappedBy = "enderecoPessoaList")
+    private List<PessoaFisica> pessoaFisicaList = new ArrayList<PessoaFisica>();
 	@Override
 	public String toString() {
-		return "PessoaEndereco [id=" + id + "]";
+		return "Endereco [id=" + id + "]";
 	}
 	
 }

@@ -23,8 +23,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "PESSOA_JURIDICA")
 @NoArgsConstructor
-@AllArgsConstructor
-public class PessoaJuridica implements Serializable {
+public class PessoaJuridica extends Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -35,22 +34,22 @@ public class PessoaJuridica implements Serializable {
     private Integer id;
     @Column(name = "CNPJ")
     private String cnpj;
-    @Column(name = "RAZAO_SOCIAL")
-    private String razao_social;
-    @Column(name = "ORGAO_RG")
-    private String orgaoRg;
-    @Column(name = "DATA_ABERTURA")
-    private Date dataAbertura;
     @Column(name = "SITUACAO_FUNCIONAMENTO")
     private Boolean situacaoFuncionamento;
-    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Pessoa pessoa;
+    
+    public PessoaJuridica(Integer id, String nome, String email, String cnpj, Boolean situacaoFuncionamento) {
+		super(nome, email);
+		this.id = id;
+		this.cnpj = cnpj;
+		this.situacaoFuncionamento = situacaoFuncionamento;
+	}
 	
     @Override
 	public String toString() {
 		return "PessoaJuridica [id=" + id + "]";
 	}
+
+	
     
     
 

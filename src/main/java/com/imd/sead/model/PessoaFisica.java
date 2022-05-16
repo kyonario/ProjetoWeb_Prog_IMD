@@ -1,19 +1,21 @@
 package com.imd.sead.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +26,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "PESSOA_FISICA")
 @NoArgsConstructor
-public class PessoaFisica implements Serializable {
+public class PessoaFisica extends Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -37,54 +39,39 @@ public class PessoaFisica implements Serializable {
     private String cpf;
     @Column(name = "RG")
     private String rg;
-    @Column(name = "ORGAO_RG")
-    private String orgaoRg;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "DATA_EMISSAO_RG")
-    private Date dataEmissaoRg;
-    @Temporal(TemporalType.DATE)
     @Column(name = "DATA_NASCIMENTO")
     private Date dataNascimento;
-    @Column(name = "SEXO")
-    private String sexo;
-    @Column(name = "NATURALIDADE")
-    private String naturalidade;
-    @Column(name = "NACIONALIDADE")
-    private String nacionalidade;
-    @Column(name = "RACA")
-    private String raca;
-    @Column(name = "TIPO_SANGUE")
-    private String tipoSangue;
-    @Column(name = "CNH_NUMERO")
-    private String cnhNumero;
-    @Column(name = "CNH_CATEGORIA")
-    private String cnhCategoria;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "CNH_VENCIMENTO")
-    private Date cnhVencimento;
-    @Column(name = "TITULO_ELEITORAL_NUMERO")
-    private String tituloEleitoralNumero;
-    @Column(name = "TITULO_ELEITORAL_ZONA")
-    private Integer tituloEleitoralZona;
-    @Column(name = "TITULO_ELEITORAL_SECAO")
-    private Integer tituloEleitoralSecao;
-    @Column(name = "RESERVISTA_NUMERO")
-    private String reservistaNumero;
-    @Column(name = "RESERVISTA_CATEGORIA")
-    private Integer reservistaCategoria;
     @Column(name = "NOME_MAE")
     private String nomeMae;
     @Column(name = "NOME_PAI")
     private String nomePai;
-    @JoinColumn(name = "ID_ESTADO_CIVIL", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private EstadoCivil estadoCivil;
-    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Pessoa pessoa;
+//    @JoinColumn(name = "ID_PESSOA_FISICA", referencedColumnName = "ID")
+//    @OneToMany(optional = false)
+//    private EstadoCivil estadoCivil;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+    		name = "PESSOA_FISICA_ENDERECO", 
+    		joinColumns = @JoinColumn(name="ID_PESSOA_FISICA"),
+    		inverseJoinColumns =  @JoinColumn(name = "ID_ENDERECO"))
+    private List<Endereco> enderecoPessoaList = new ArrayList<Endereco>();
+    
+    
+    public PessoaFisica(Integer id, String nome, String email, String cpf, String rg, Date dataNascimento, String nomeMae, String nomePai) {
+		super(nome, email);
+		this.cpf = cpf;
+		this.rg = rg;
+		this.dataNascimento = dataNascimento;
+		this.nomeMae = nomeMae;
+		this.nomePai = nomePai;
+	}
+    
+    public void addEndereco() {
+    	
+    }
     
 	@Override
 	public String toString() {
 		return "PessoaFisica [id=" + id + "]";
 	}
+	
 }
