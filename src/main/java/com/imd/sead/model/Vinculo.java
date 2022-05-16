@@ -1,7 +1,9 @@
 package com.imd.sead.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -9,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +21,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "VINCULO")
+@Entity
+@Table(name = "VINCULO")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vinculo implements Serializable{
@@ -38,4 +43,9 @@ public class Vinculo implements Serializable{
 	private Double salarioBase;
 	@Column(name = "TOTAL_HORAS_TRABALHADAS")
 	private Integer totalHorasTrabalhadas;
+    @ManyToMany(mappedBy = "vinculoPessoaFisica")
+    private List<PessoaFisica> pessoaFisicaVinculo = new ArrayList<PessoaFisica>();
+    @ManyToMany(mappedBy = "vinculoPessoaJuridica")
+    private List<PessoaJuridica> pessoaJuridicaVinculo = new ArrayList<PessoaJuridica>();
+    
 }

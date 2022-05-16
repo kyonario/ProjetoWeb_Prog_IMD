@@ -37,9 +37,10 @@ public class Deficiencia implements Serializable{
 	private String tipoDeficiencia;
 	@Column(name = "LAUDO_MEDICO")
 	private String laudoMedico;
-	@JoinColumn(name = "ID_PESSOA_FISICA", referencedColumnName = "ID")
-	@ManyToOne(optional = false)
+	@ManyToOne
+	@JoinColumn(name="ID_PESSOA_FISICA")
 	private PessoaFisica pessoaFisica;
+	
 	
 	@Override
 	public String toString() {

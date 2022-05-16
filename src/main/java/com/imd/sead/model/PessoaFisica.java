@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -45,15 +46,21 @@ public class PessoaFisica extends Pessoa implements Serializable {
     private String nomeMae;
     @Column(name = "NOME_PAI")
     private String nomePai;
-//    @JoinColumn(name = "ID_PESSOA_FISICA", referencedColumnName = "ID")
-//    @OneToMany(optional = false)
-//    private EstadoCivil estadoCivil;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="pessoaFisica") //bidirectional with deficiencia
+    private List<Deficiencia> deficiencia;
+    
+    @ManyToMany(cascade = CascadeType.ALL) //With Endereco
     @JoinTable(
     		name = "PESSOA_FISICA_ENDERECO", 
     		joinColumns = @JoinColumn(name="ID_PESSOA_FISICA"),
     		inverseJoinColumns =  @JoinColumn(name = "ID_ENDERECO"))
     private List<Endereco> enderecoPessoaList = new ArrayList<Endereco>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+    		name = "PESSOA_FISICA_VINCULO",
+    		joinColumns = @JoinColumn(name  = "ID_PESSOA_FISICA"),
+    		inverseJoinColumns = @JoinColumn(name = "ID_VINCULO"))
+    private List<Vinculo> vinculoPessoaFisica = new ArrayList<Vinculo>();
     
     
     public PessoaFisica(Integer id, String nome, String email, String cpf, String rg, Date dataNascimento, String nomeMae, String nomePai) {
@@ -65,9 +72,6 @@ public class PessoaFisica extends Pessoa implements Serializable {
 		this.nomePai = nomePai;
 	}
     
-    public void addEndereco() {
-    	
-    }
     
 	@Override
 	public String toString() {
