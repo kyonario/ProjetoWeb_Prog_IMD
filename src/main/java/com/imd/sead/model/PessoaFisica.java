@@ -5,37 +5,37 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
+@ToString
 @Table(name = "PESSOA_FISICA")
 @NoArgsConstructor
+@AllArgsConstructor
+@Audited
+@AuditTable(value = "PESSOA_FISICA_AUDIT")
 public class PessoaFisica extends Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Column(name = "CPF")
     private String cpf;
     @Column(name = "RG")
@@ -63,7 +63,7 @@ public class PessoaFisica extends Pessoa implements Serializable {
     private List<Vinculo> vinculoPessoaFisica = new ArrayList<Vinculo>();
     
     
-    public PessoaFisica(Integer id, String nome, String email, String cpf, String rg, Date dataNascimento, String nomeMae, String nomePai) {
+    public PessoaFisica(String nome, String email, String cpf, String rg, Date dataNascimento, String nomeMae, String nomePai) {
 		super(nome, email);
 		this.cpf = cpf;
 		this.rg = rg;
@@ -73,9 +73,9 @@ public class PessoaFisica extends Pessoa implements Serializable {
 	}
     
     
-	@Override
-	public String toString() {
-		return "PessoaFisica [id=" + id + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "PessoaFisica [id=" + id + "]";
+//	}
 	
 }

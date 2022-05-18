@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
+import com.imd.sead.model.generic.BaseEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,16 +27,12 @@ import lombok.Setter;
 @Table(name = "DEFICIENCIA")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Deficiencia implements Serializable{
+@Audited
+public class Deficiencia extends BaseEntity implements Serializable{
 	
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name= "ID")
-	private Integer id;
 	@Column(name = "TIPO_DEFICIENCIA")
 	private String tipoDeficiencia;
 	@Column(name = "LAUDO_MEDICO")
