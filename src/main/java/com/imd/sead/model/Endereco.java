@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
-import com.imd.sead.model.generic.BaseEntity;
+import com.imd.sead.model.generic.AbstractBaseEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +26,7 @@ import lombok.ToString;
 @Table(name = "ENDERECO")
 @Audited
 @AuditTable(value = "ENDERECO_AUDIT")
-public class Endereco extends BaseEntity implements Serializable {
+public class Endereco extends AbstractBaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     

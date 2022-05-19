@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
-import com.imd.sead.model.generic.BaseEntity;
+import com.imd.sead.model.generic.AbstractBaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +28,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Audited
-public class Vinculo extends BaseEntity implements Serializable{
+public class Vinculo extends AbstractBaseEntity implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	

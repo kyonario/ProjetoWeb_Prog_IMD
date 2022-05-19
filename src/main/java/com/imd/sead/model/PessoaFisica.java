@@ -34,7 +34,7 @@ import lombok.ToString;
 @AuditTable(value = "PESSOA_FISICA_AUDIT")
 public class PessoaFisica extends Pessoa implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = 1L;
     
     @Column(name = "CPF")
     private String cpf;

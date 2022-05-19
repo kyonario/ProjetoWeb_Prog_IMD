@@ -4,10 +4,10 @@ import org.springframework.stereotype.Service;
 
 import com.imd.sead.model.PessoaFisica;
 import com.imd.sead.repository.PessoaFisicaRepository;
-import com.imd.sead.service.generic.AbstractBaseEntity;
+import com.imd.sead.service.generic.AbstractBaseEntityService;
 
 @Service
-public class PessoaFisicaService extends AbstractBaseEntity<PessoaFisica, PessoaFisicaRepository>{
+public class PessoaFisicaService extends AbstractBaseEntityService<PessoaFisica, PessoaFisicaRepository>{
 	public PessoaFisicaService(PessoaFisicaRepository repository) {
 		super(repository);
 		
