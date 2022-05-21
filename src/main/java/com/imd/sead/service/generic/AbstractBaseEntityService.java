@@ -44,4 +44,5 @@ public abstract class AbstractBaseEntityService<E extends AbstractBaseEntity, R 
 			return true;
 		}).orElse(false);
 	}
+
 }

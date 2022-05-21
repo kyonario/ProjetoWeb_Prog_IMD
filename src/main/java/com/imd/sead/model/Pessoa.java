@@ -24,7 +24,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Audited
 @MappedSuperclass
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Pessoa extends AbstractBaseEntity implements Serializable{
