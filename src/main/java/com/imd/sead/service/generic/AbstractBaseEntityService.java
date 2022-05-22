@@ -31,9 +31,11 @@ public abstract class AbstractBaseEntityService<E extends AbstractBaseEntity, R 
 
 	@Override
 	public Optional<E> update(Long id, E entity) {
+		entity.setId(id);
 		return repository.findById(id).map(record -> {
-			repository.saveAndFlush(entity);
-			return record;
+			//E update = repository.save(entity);
+			E update = repository.saveAndFlush(entity);	
+			return update;
 		});
 	}
 

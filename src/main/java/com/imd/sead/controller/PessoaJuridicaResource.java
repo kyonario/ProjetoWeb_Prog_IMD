@@ -15,20 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.imd.sead.model.PessoaFisica;
-import com.imd.sead.service.PessoaFisicaService;
+import com.imd.sead.model.PessoaJuridica;
+import com.imd.sead.service.PessoaJuridicaService;
 import com.imd.sead.service.exceptions.ObjectNotFoundException;
 
 @RestController
-@RequestMapping("/pf")
-public class PessoaFisicaResource {
+@RequestMapping("/pj")
+public class PessoaJuridicaResource {
 
 	@Autowired
-	PessoaFisicaService service;
+	PessoaJuridicaService service;
 
-	/*EndPoint: Cadastrar PessoaFisica*/
+	/*EndPoint: Cadastrar PessoaJuridica*/
 	@PostMapping
-	public ResponseEntity<Void> create(@RequestBody PessoaFisica obj) {
+	public ResponseEntity<Void> create(@RequestBody PessoaJuridica obj) {
 		obj = service.create(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -36,19 +36,19 @@ public class PessoaFisicaResource {
 	}
 	
 	
-	/*EndPoint: buscar pessoa fisica*/
+	/*EndPoint: buscar PessoaJuridica*/
 	@GetMapping(value = "/{id}")
-	public PessoaFisica find(@PathVariable Long id){
+	public PessoaJuridica find(@PathVariable Long id){
 	//obj.setId(id);
 		
-		Optional<PessoaFisica> obj = service.findById(id);
+		Optional<PessoaJuridica> obj = service.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + PessoaFisica.class.getName()));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + PessoaJuridica.class.getName()));
 		
 				
 	}
 	
-	/*EndPoint: Deletar pessoa fisica*/
+	/*EndPoint: Deletar PessoaJuridica*/
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		
@@ -56,11 +56,11 @@ public class PessoaFisicaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	/*EndPoint: Atualizar pessoa fisica*/
+	/*EndPoint: Atualizar PessoaJuridica*/
 	@PutMapping(value = "/{id}")
-	public ResponseEntity update(@PathVariable Long id, @RequestBody PessoaFisica objIn){
+	public ResponseEntity update(@PathVariable Long id, @RequestBody PessoaJuridica objIn){
 							
-		Optional<PessoaFisica> objUpdate = service.update(id, objIn);
+		Optional<PessoaJuridica> objUpdate = service.update(id, objIn);
 		
 		return ResponseEntity.ok().body(objUpdate);
 		
