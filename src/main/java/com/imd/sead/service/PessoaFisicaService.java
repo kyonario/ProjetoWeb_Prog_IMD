@@ -12,5 +12,9 @@ public class PessoaFisicaService extends AbstractBaseEntityService<PessoaFisica,
 		super(repository);
 		
 	}
+	
+	 public PessoaFisica saveAndFlush(PessoaFisica c){
+	        return repository.saveAndFlush(c);
+	    }
 
 }

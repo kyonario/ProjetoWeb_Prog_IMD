@@ -40,5 +40,6 @@ public abstract class AbstractBaseEntity implements Serializable {
         this.deleteAt = LocalDateTime.now();
     }
 
-    // getters and setters
+    
+    
 }
