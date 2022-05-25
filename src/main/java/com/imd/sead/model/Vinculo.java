@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.envers.Audited;
 
 import com.imd.sead.model.generic.AbstractBaseEntity;
+import com.imd.sead.model.PessoaJuridica;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,9 +27,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Audited
 public class Vinculo extends AbstractBaseEntity implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Column(name = "MATRICULA")
 	private String matricula;
 	@Column(name = "DATA_NOMEACAO")
@@ -42,9 +40,10 @@ public class Vinculo extends AbstractBaseEntity implements Serializable{
 	private Double salarioBase;
 	@Column(name = "TOTAL_HORAS_TRABALHADAS")
 	private Integer totalHorasTrabalhadas;
-    @ManyToMany(mappedBy = "vinculoPessoaFisica")
-    private List<PessoaFisica> pessoaFisicaVinculo = new ArrayList<PessoaFisica>();
-    @ManyToMany(mappedBy = "vinculoPessoaJuridica")
-    private List<PessoaJuridica> pessoaJuridicaVinculo = new ArrayList<PessoaJuridica>();
-    
+	@ManyToMany(mappedBy = "vinculoPessoaFisica")
+	private List<PessoaFisica> pessoaFisicaVinculo = new ArrayList<PessoaFisica>();
+	@ManyToOne
+	@JoinColumn(name="ID_PESSOA_JURIDICA")
+	private PessoaJuridica pessoaJuridica;
+
 }
