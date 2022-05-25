@@ -27,3 +27,32 @@ Doc Json para Testar os EndPonts
 
 
 }
+
+#Json teste para pessoa jurídica
+
+{
+  "nome":"SEAD",
+  "email":"sead@rn.gov.br",  
+  "cnpj": "01002123000187",
+  "situacao_funcionamento":"true",
+  "endereco": [
+    {
+      "logradouro": "rua dos canindes",
+      "numero": "123123",
+      "comlemento": "garagem",
+      "bairro": "alto do ceu",
+      "cidade": "mossoro",
+      "cep": "4564564546",
+      "uf": "rn"
+    }
+  ],
+  "vinculoPessoaJuridica": [
+    {
+      "matricula": "2123123423423",
+	  "data_nomeacao":"",
+	  "data_posse":"",
+	  "salario_base":"",
+	  "total_horas_trabalhadas":""
+    }]
+
+}
