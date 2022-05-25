@@ -34,7 +34,7 @@ Doc Json para Testar os EndPonts
   "nome":"SEAD",
   "email":"sead@rn.gov.br",  
   "cnpj": "01002123000187",
-  "situacao_funcionamento":"true",
+  "situacaoFuncionamento":"true",
   "endereco": [
     {
       "logradouro": "rua dos canindes",
@@ -49,10 +49,10 @@ Doc Json para Testar os EndPonts
   "vinculoPessoaJuridica": [
     {
       "matricula": "2123123423423",
-	  "data_nomeacao":"",
-	  "data_posse":"",
-	  "salario_base":"",
-	  "total_horas_trabalhadas":""
+	  "dataNomeacao":"",
+	  "dataPosse":"",
+	  "salarioBase":"",
+	  "totalHorasTrabalhadas":""
     }]
 
 }
