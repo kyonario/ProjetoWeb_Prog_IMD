@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,10 +41,12 @@ public class PessoaJuridica extends Pessoa implements Serializable {
     private String cnpj;
     @Column(name = "SITUACAO_FUNCIONAMENTO")
     private Boolean situacaoFuncionamento;
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinTable(
     		name = "PESSOA_JURIDICA_VINCULO",
     		joinColumns = @JoinColumn(name  = "ID_PESSOA_JURIDICA"),
@@ -56,10 +60,10 @@ public class PessoaJuridica extends Pessoa implements Serializable {
 		this.situacaoFuncionamento = situacaoFuncionamento;
 	}
 	
-//    @Override
-//	public String toString() {
-//		return "PessoaJuridica [id=" + id + "]";
-//	}
+    @Override
+	public String toString() {
+		return "PessoaJuridica [id=" + id + "]";
+	}
 
 	
     

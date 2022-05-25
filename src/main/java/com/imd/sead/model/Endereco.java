@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.imd.sead.model.generic.AbstractBaseEntity;
 
 import lombok.Getter;
@@ -46,12 +47,13 @@ public class Endereco extends AbstractBaseEntity implements Serializable {
     private String uf;
     @ManyToMany(mappedBy = "enderecoPessoaList")
     private List<PessoaFisica> pessoaFisicaList = new ArrayList<PessoaFisica>();
+    @JsonIgnore
     @OneToOne(mappedBy = "endereco")
     private PessoaJuridica pessoaJuridica;
     
-//	@Override
-//	public String toString() {
-//		return "Endereco [id=" + id + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Endereco [id=" + id + "]";
+	}
 	
 }
