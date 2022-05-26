@@ -1,30 +1,39 @@
 # ProjetoWeb_Prog_IMD
 
-Doc Json para Testar os EndPonts
+EndPoint: PessoaFisica
 
-
-{
-    "nome": "",
-    "email":"teste@email.com",
-    "cpf": "234234234345345",
-    "rg": "23423234",
-    "dataNascimento": "2020-03-01",
-    "nomeMae": "rasdrsd",
-    "nomePai": "rerasdasd",
-    "deficiencia": [{"tipo_deficiencia":"tiringa"}],
-    "enderecoPessoaList": [{
-                    "logradouro": "rua dos canindes",
-                    "numero": "123123",
-                    "comlemento": "garagem",
-                    "bairro": "alto do ceu",
-                    "cidade": "mossoro",
-                    "cep": "4564564546",
-                    "uf": "rn"
-                    }],
-    "vinculoPessoaFisica": [{
-                    "matricula": "2123123423423"
-    }]
-
+{ 
+	"nome": "Milton", 
+	"email":"teste@email.com", 
+	"cpf": "234234234345345", 
+	"rg": "23423234", 
+	"dataNascimento": "2020-03-01", 
+	"nomeMae": "rasdrsd", 
+	"nomePai": "rerasdasd", 
+	"deficienciaPessoaFisicaList": [
+		{
+			"tipoDeficiencia":"amputado",
+			"laudoMedico":"nao pode trabalhar com atividades manuais"
+		}
+		],
+	"enderecoPessoaFisicaList": [
+		{ 
+			"logradouro": "rua dos canindes", 
+			"numero": "123123", 
+			"comlemento": "garagem", 
+			"bairro": "alto do ceu", 
+			"cidade": "mossoro", 
+			"cep": "4564564546",
+			"uf": "rn" }], 
+	"vinculoPessoaFisica": [
+		{ 
+			"matricula": "2123123423423",
+			"dataNomeacao": "22-08-1988",
+			"dataPosse": "22-08-1988",
+			"salarioBase": "19876",
+			"totalHorasTrabalhadas": "36"
+			
+		}]
 
 }
 
