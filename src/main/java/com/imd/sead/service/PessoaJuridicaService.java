@@ -13,6 +13,5 @@ public class PessoaJuridicaService extends AbstractBaseEntityService<PessoaJurid
 		super(repository);
 		
 	}
-	 
 
 }
