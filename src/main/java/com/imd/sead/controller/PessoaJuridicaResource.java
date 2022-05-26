@@ -1,9 +1,12 @@
 package com.imd.sead.controller;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
+import com.imd.sead.service.PessoaJuridicaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.imd.sead.model.PessoaJuridica;
-import com.imd.sead.service.PessoaJuridicaService;
 import com.imd.sead.service.exceptions.ObjectNotFoundException;
 
 @RestController
@@ -35,7 +37,6 @@ public class PessoaJuridicaResource {
 
 	}
 	
-	
 	/*EndPoint: buscar PessoaJuridica*/
 	@GetMapping(value = "/{id}")
 	public PessoaJuridica find(@PathVariable Long id){
@@ -44,8 +45,16 @@ public class PessoaJuridicaResource {
 		Optional<PessoaJuridica> obj = service.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + PessoaJuridica.class.getName()));
-		
-				
+
+	}
+
+	@GetMapping
+	public ResponseEntity<List<PessoaJuridica>> listar(){
+		List<PessoaJuridica> pessoaJuridicas = service.findAll();
+		if(!pessoaJuridicas.isEmpty()){
+			return new ResponseEntity<List<PessoaJuridica>>(pessoaJuridicas, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	/*EndPoint: Deletar PessoaJuridica*/
