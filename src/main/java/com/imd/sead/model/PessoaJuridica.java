@@ -1,12 +1,14 @@
 package com.imd.sead.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
@@ -35,22 +37,10 @@ public class PessoaJuridica extends Pessoa implements Serializable {
     @Column(name = "SITUACAO_FUNCIONAMENTO")
     private Boolean situacaoFuncionamento;
 
-    @OneToOne
-    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ENDERECO")
     private Endereco endereco;
 
-    @OneToMany(mappedBy="pessoaJuridica") //bidirectional with deficiencia
-    private List<Vinculo> vinculo;
-    /*
-    @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
-    @JoinTable(
-          name = "PESSOA_JURIDICA_VINCULO",
-          joinColumns = @JoinColumn(name  = "ID_PESSOA_JURIDICA"),
-          inverseJoinColumns = @JoinColumn(name = "ID_VINCULO"))
-    private List<Vinculo> vinculoPessoaJuridica = new ArrayList<Vinculo>();
- */
 
     public PessoaJuridica(String nome, String email, String cnpj, Boolean situacaoFuncionamento) {
         super(nome, email);

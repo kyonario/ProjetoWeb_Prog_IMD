@@ -45,11 +45,8 @@ public class Endereco extends AbstractBaseEntity implements Serializable {
     private String cep;
     @Column(name = "UF")
     private String uf;
-    @ManyToMany(mappedBy = "enderecoPessoaList")
+    @ManyToMany(mappedBy = "enderecoPessoaFisicaList")
     private List<PessoaFisica> pessoaFisicaList = new ArrayList<PessoaFisica>();
-    @JsonIgnore
-    @OneToOne(mappedBy = "endereco")
-    private PessoaJuridica pessoaJuridica;
     
 	@Override
 	public String toString() {

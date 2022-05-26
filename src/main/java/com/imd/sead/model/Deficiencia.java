@@ -1,15 +1,12 @@
 package com.imd.sead.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
@@ -37,9 +34,8 @@ public class Deficiencia extends AbstractBaseEntity implements Serializable{
 	private String tipoDeficiencia;
 	@Column(name = "LAUDO_MEDICO")
 	private String laudoMedico;
-	@ManyToOne
-	@JoinColumn(name="ID_PESSOA_FISICA")
-	private PessoaFisica pessoaFisica;
+	@ManyToMany(mappedBy = "deficienciaPessoaFisicaList")
+    private List<PessoaFisica> pessoaFisicaList = new ArrayList<PessoaFisica>();
 	
 	
 	@Override

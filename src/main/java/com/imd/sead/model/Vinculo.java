@@ -40,9 +40,12 @@ public class Vinculo extends AbstractBaseEntity implements Serializable{
 	private Double salarioBase;
 	@Column(name = "TOTAL_HORAS_TRABALHADAS")
 	private Integer totalHorasTrabalhadas;
-	@ManyToMany(mappedBy = "vinculoPessoaFisica")
-	private List<PessoaFisica> pessoaFisicaVinculo = new ArrayList<PessoaFisica>();
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="ID_PESSOA_FISICA")
+	private PessoaFisica pessoaFisicaVinculo;
+	
+	@OneToOne
 	@JoinColumn(name="ID_PESSOA_JURIDICA")
 	private PessoaJuridica pessoaJuridica;
 
