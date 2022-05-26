@@ -51,13 +51,13 @@ public class PessoaFisica extends Pessoa implements Serializable {
     private String nomePai;
     
     
-    
-    @ManyToMany(cascade = CascadeType.ALL) //With Endereco
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL ) //With Endereco
     @JoinTable(
     		name = "PESSOA_FISICA_ENDERECO", 
     		joinColumns = @JoinColumn(name="ID_PESSOA_FISICA"),
     		inverseJoinColumns =  @JoinColumn(name = "ID_ENDERECO"))
-    private List<Endereco> enderecoPessoaFisicaList = new ArrayList<Endereco>();
+    private List<Endereco> enderecoPessoaFisicaList;
     
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL) //With Endereco
@@ -65,12 +65,11 @@ public class PessoaFisica extends Pessoa implements Serializable {
     		name = "PESSOA_FISICA_DEFICIENCIA", 
     		joinColumns = @JoinColumn(name="ID_PESSOA_FISICA"),
     		inverseJoinColumns =  @JoinColumn(name = "ID_DEFICIENCIA"))
-    private List<Deficiencia> deficienciaPessoaFisicaList = new ArrayList<Deficiencia>();
-    
+    private List<Deficiencia> deficienciaPessoaFisicaList;
     
     @JsonIgnore
-    @OneToMany(mappedBy="pessoaFisicaVinculo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Vinculo> vinculoPessoaFisica = new ArrayList<Vinculo>();
+    @OneToMany(mappedBy="pessoaFisicaVinculo", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<Vinculo> vinculoPessoaFisica;
     
     
     public PessoaFisica(String nome, String email, String cpf, String rg, Date dataNascimento, String nomeMae, String nomePai) {
