@@ -38,6 +38,10 @@ public abstract class AbstractBaseEntityService<E extends AbstractBaseEntity, R 
 			return update;
 		});
 	}
+	
+	public E saveAndFlush(E entity) {
+		return repository.saveAndFlush(entity);
+	}
 
 	@Override
 	public Boolean delete(Long id) {

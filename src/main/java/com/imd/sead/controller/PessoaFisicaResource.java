@@ -58,11 +58,16 @@ public class PessoaFisicaResource {
 	
 	/*EndPoint: Atualizar pessoa fisica*/
 	@PutMapping(value = "/{id}")
-	public ResponseEntity update(@PathVariable Long id, @RequestBody PessoaFisica objIn){
+	public ResponseEntity<PessoaFisica> update(@PathVariable Long id, @RequestBody PessoaFisica objIn){
 							
-		Optional<PessoaFisica> objUpdate = service.update(id, objIn);
+//		Optional<PessoaFisica> objUpdate = service.update(id, objIn);
+		return service.findById(id)	
+				.map(record -> {
+					service.saveAndFlush(objIn);
+					return ResponseEntity.ok(objIn);
+				}).orElse(ResponseEntity.notFound().build());
 		
-		return ResponseEntity.ok().body(objUpdate);
+//		return ResponseEntity.ok().body(objUpdate);
 		
 	}
 	

@@ -51,15 +51,15 @@ public class PessoaFisica extends Pessoa implements Serializable {
     private String nomePai;
     
     
-    @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL ) //With Endereco
+  
+    @ManyToMany(cascade = CascadeType.ALL )
     @JoinTable(
     		name = "PESSOA_FISICA_ENDERECO", 
     		joinColumns = @JoinColumn(name="ID_PESSOA_FISICA"),
     		inverseJoinColumns =  @JoinColumn(name = "ID_ENDERECO"))
     private List<Endereco> enderecoPessoaFisicaList;
     
-    @JsonIgnore
+    
     @ManyToMany(cascade = CascadeType.ALL) //With Endereco
     @JoinTable(
     		name = "PESSOA_FISICA_DEFICIENCIA", 
@@ -67,7 +67,7 @@ public class PessoaFisica extends Pessoa implements Serializable {
     		inverseJoinColumns =  @JoinColumn(name = "ID_DEFICIENCIA"))
     private List<Deficiencia> deficienciaPessoaFisicaList;
     
-    @JsonIgnore
+    
     @OneToMany(mappedBy="pessoaFisicaVinculo", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Vinculo> vinculoPessoaFisica;
     

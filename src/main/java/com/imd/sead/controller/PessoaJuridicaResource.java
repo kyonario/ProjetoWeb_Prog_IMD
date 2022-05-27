@@ -48,6 +48,7 @@ public class PessoaJuridicaResource {
 
 	}
 
+	/*EndPoint: Buscar todos PessoaJuridica*/
 	@GetMapping
 	public ResponseEntity<List<PessoaJuridica>> listar(){
 		List<PessoaJuridica> pessoaJuridicas = service.findAll();
@@ -67,11 +68,17 @@ public class PessoaJuridicaResource {
 	
 	/*EndPoint: Atualizar PessoaJuridica*/
 	@PutMapping(value = "/{id}")
-	public ResponseEntity update(@PathVariable Long id, @RequestBody PessoaJuridica objIn){
+	public ResponseEntity<PessoaJuridica> update(@PathVariable Long id, @RequestBody PessoaJuridica objIn){
 							
-		Optional<PessoaJuridica> objUpdate = service.update(id, objIn);
+//		Optional<PessoaJuridica> objUpdate = service.update(id, objIn);
+//		
+//		return ResponseEntity.ok().body(objUpdate);	
+		return service.findById(id)	
+				.map(record -> {
+					service.saveAndFlush(objIn);
+					return ResponseEntity.ok(objIn);
+				}).orElse(ResponseEntity.notFound().build());
 		
-		return ResponseEntity.ok().body(objUpdate);
 		
 	}
 	
