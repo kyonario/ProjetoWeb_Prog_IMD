@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.imd.sead.model.generic.AbstractBaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class Deficiencia extends AbstractBaseEntity implements Serializable{
 	private String tipoDeficiencia;
 	@Column(name = "LAUDO_MEDICO")
 	private String laudoMedico;
+	@JsonIgnore
 	@ManyToMany(mappedBy = "deficienciaPessoaFisicaList")
     private List<PessoaFisica> pessoaFisicaList = new ArrayList<PessoaFisica>();
 	

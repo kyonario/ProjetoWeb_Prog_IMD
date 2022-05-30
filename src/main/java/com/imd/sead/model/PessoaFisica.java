@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,7 +48,8 @@ public class PessoaFisica extends Pessoa implements Serializable {
     private String nomePai;
     
     
-    @JsonProperty("pessoaEnd")
+//    @JsonProperty("pessoaEnd")
+//    @JsonBackReference
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
     		name = "PESSOA_FISICA_ENDERECO", 
@@ -55,7 +57,7 @@ public class PessoaFisica extends Pessoa implements Serializable {
     		inverseJoinColumns =  @JoinColumn(name = "ID_ENDERECO"))
     private List<Endereco> enderecoPessoaFisicaList;
     
-    @JsonProperty("pessoaDefi")	
+//    @JsonProperty("pessoaDefi")	
     @ManyToMany(cascade = CascadeType.ALL) //With Endereco
     @JoinTable(
     		name = "PESSOA_FISICA_DEFICIENCIA", 

@@ -14,6 +14,7 @@ import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.imd.sead.model.generic.AbstractBaseEntity;
 
 import lombok.Getter;
@@ -45,6 +46,7 @@ public class Endereco extends AbstractBaseEntity implements Serializable {
     private String cep;
     @Column(name = "UF")
     private String uf;
+    @JsonIgnore
     @ManyToMany(mappedBy = "enderecoPessoaFisicaList")
     private List<PessoaFisica> pessoaFisicaList;
     
