@@ -70,9 +70,7 @@ public class VinculoResource {
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Vinculo> update(@PathVariable Long id, @RequestBody Vinculo objIn){
 							
-//		Optional<PessoaJuridica> objUpdate = service.update(id, objIn);
-//		
-//		return ResponseEntity.ok().body(objUpdate);	
+		objIn.setId(id);
 		return service.findById(id)	
 				.map(record -> {
 					service.saveAndFlush(objIn);

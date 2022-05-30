@@ -70,15 +70,17 @@ public class EnderecoResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	/*EndPoint: Atualizar PessoaJuridica*/
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity update(@PathVariable Long id, @RequestBody Endereco objIn){
+	public ResponseEntity<Endereco> update(@PathVariable Long id, @RequestBody Endereco objIn){
 							
-		Optional<Endereco> objUpdate = service.update(id, objIn);
-		
-		return ResponseEntity.ok().body(objUpdate);
-		
+		objIn.setId(id);
+		return service.findById(id)	
+				.map(record -> {
+					service.saveAndFlush(objIn);
+					return ResponseEntity.ok(objIn);
+				}).orElse(ResponseEntity.notFound().build());
+	
+	
 	}
-	
-	
 }

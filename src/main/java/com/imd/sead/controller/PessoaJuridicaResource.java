@@ -68,11 +68,8 @@ public class PessoaJuridicaResource {
 	
 	/*EndPoint: Atualizar PessoaJuridica*/
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<PessoaJuridica> update(@PathVariable Long id, @RequestBody PessoaJuridica objIn){
-							
-//		Optional<PessoaJuridica> objUpdate = service.update(id, objIn);
-//		
-//		return ResponseEntity.ok().body(objUpdate);	
+	public ResponseEntity<PessoaJuridica> update(@PathVariable Long id, @RequestBody PessoaJuridica objIn){	
+		objIn.setId(id);
 		return service.findById(id)	
 				.map(record -> {
 					service.saveAndFlush(objIn);

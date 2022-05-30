@@ -69,10 +69,7 @@ public class DeficienciaResource {
 	/* EndPoint: Atualizar Vinculo */
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Deficiencia> update(@PathVariable Long id, @RequestBody Deficiencia objIn) {
-
-//		Optional<PessoaJuridica> objUpdate = service.update(id, objIn);
-//		
-//		return ResponseEntity.ok().body(objUpdate);	
+		objIn.setId(id);
 		return service.findById(id).map(record -> {
 			service.saveAndFlush(objIn);
 			return ResponseEntity.ok(objIn);

@@ -74,6 +74,7 @@ public class PessoaFisicaResource {
 	public ResponseEntity<PessoaFisica> update(@PathVariable Long id, @RequestBody PessoaFisica objIn){
 							
 //		Optional<PessoaFisica> objUpdate = service.update(id, objIn);
+		objIn.setId(id);
 		return service.findById(id)	
 				.map(record -> {
 					service.saveAndFlush(objIn);
