@@ -1,9 +1,11 @@
 package com.imd.sead.controller;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.imd.sead.model.Endereco;
+import com.imd.sead.model.PessoaFisica;
 import com.imd.sead.model.PessoaJuridica;
 import com.imd.sead.service.EnderecoService;
 import com.imd.sead.service.exceptions.ObjectNotFoundException;
@@ -47,6 +50,16 @@ public class EnderecoResource {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Endereco.class.getName()));
 		
 				
+	}
+	
+	/*EndPoint: Buscar todos Endereco*/
+	@GetMapping
+	public ResponseEntity<List<Endereco>> listar(){
+		List<Endereco> endereco = service.findAll();
+		if(!endereco.isEmpty()){
+			return new ResponseEntity<List<Endereco>>(endereco, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	/*EndPoint: Deletar PessoaJuridica*/

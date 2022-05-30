@@ -17,72 +17,66 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.imd.sead.model.PessoaFisica;
-import com.imd.sead.model.PessoaJuridica;
-import com.imd.sead.service.PessoaFisicaService;
+import com.imd.sead.model.Deficiencia;
+import com.imd.sead.service.DeficienciaService;
 import com.imd.sead.service.exceptions.ObjectNotFoundException;
 
 @RestController
-@RequestMapping("/pf")
-public class PessoaFisicaResource {
+@RequestMapping("/deficiencia")
+public class DeficienciaResource {
 
 	@Autowired
-	PessoaFisicaService service;
+	DeficienciaService service;
 
-	/*EndPoint: Cadastrar PessoaFisica*/
+	/* EndPoint: Cadastrar Vinculo */
 	@PostMapping
-	public ResponseEntity<Void> create(@RequestBody PessoaFisica obj) {
+	public ResponseEntity<Void> create(@RequestBody Deficiencia obj) {
 		obj = service.create(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 
 	}
-	
-	
-	/*EndPoint: buscar pessoa fisica*/
+
+	/* EndPoint: buscar Deficiencia */
 	@GetMapping(value = "/{id}")
-	public PessoaFisica find(@PathVariable Long id){
-	//obj.setId(id);
-		
-		Optional<PessoaFisica> obj = service.findById(id);
+	public Deficiencia find(@PathVariable Long id) {
+		// obj.setId(id);
+
+		Optional<Deficiencia> obj = service.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + PessoaFisica.class.getName()));
-		
-				
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Deficiencia.class.getName()));
+
 	}
-	
-	/*EndPoint: Buscar todos PessoaFisica*/
+
+	/* EndPoint: Buscar todos Vinculo */
 	@GetMapping
-	public ResponseEntity<List<PessoaFisica>> listar(){
-		List<PessoaFisica> pessoaFisica = service.findAll();
-		if(!pessoaFisica.isEmpty()){
-			return new ResponseEntity<List<PessoaFisica>>(pessoaFisica, HttpStatus.OK);
+	public ResponseEntity<List<Deficiencia>> listar() {
+		List<Deficiencia> vinculo = service.findAll();
+		if (!vinculo.isEmpty()) {
+			return new ResponseEntity<List<Deficiencia>>(vinculo, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
-	/*EndPoint: Deletar pessoa fisica*/
+
+	/* EndPoint: Deletar Vinculo */
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
-		
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	/*EndPoint: Atualizar pessoa fisica*/
+
+	/* EndPoint: Atualizar Vinculo */
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<PessoaFisica> update(@PathVariable Long id, @RequestBody PessoaFisica objIn){
-							
-//		Optional<PessoaFisica> objUpdate = service.update(id, objIn);
-		return service.findById(id)	
-				.map(record -> {
-					service.saveAndFlush(objIn);
-					return ResponseEntity.ok(objIn);
-				}).orElse(ResponseEntity.notFound().build());
-		
-//		return ResponseEntity.ok().body(objUpdate);
-		
+	public ResponseEntity<Deficiencia> update(@PathVariable Long id, @RequestBody Deficiencia objIn) {
+
+//		Optional<PessoaJuridica> objUpdate = service.update(id, objIn);
+//		
+//		return ResponseEntity.ok().body(objUpdate);	
+		return service.findById(id).map(record -> {
+			service.saveAndFlush(objIn);
+			return ResponseEntity.ok(objIn);
+		}).orElse(ResponseEntity.notFound().build());
+
 	}
-	
-	
 }
