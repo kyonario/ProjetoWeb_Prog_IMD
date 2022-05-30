@@ -3,18 +3,15 @@ package com.imd.sead.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.imd.sead.model.generic.AbstractBaseEntity;
 
 import lombok.AllArgsConstructor;
@@ -34,7 +31,7 @@ import lombok.ToString;
 public class Vinculo extends AbstractBaseEntity implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Column(name = "MATRICULA")
 	private String matricula;
 	@Column(name = "DATA_NOMEACAO")
@@ -44,14 +41,25 @@ public class Vinculo extends AbstractBaseEntity implements Serializable{
 	@Column(name = "SALARIO_BASE")
 	private Double salarioBase;
 	@Column(name = "TOTAL_HORAS_TRABALHADAS")
-	private Integer totalHorasTrabalhadas;
-	
+	private Integer totalHorasTrabalhadas;	
 	@ManyToOne
 	@JoinColumn(name="ID_PESSOA_FISICA")
-	private PessoaFisica pessoaFisicaVinculo;
-	
-	@OneToOne
+	private PessoaFisica pf;
+	@ManyToOne
 	@JoinColumn(name="ID_PESSOA_JURIDICA")
-	private PessoaJuridica pessoaJuridica;
+	private PessoaJuridica pj;
+	
+	
+	public Vinculo(String matricula, Date dataNomeacao, Date dataPosse, Double salarioBase,
+			Integer totalHorasTrabalhadas) {
+		super();
+		this.matricula = matricula;
+		this.dataNomeacao = dataNomeacao;
+		this.dataPosse = dataPosse;
+		this.salarioBase = salarioBase;
+		this.totalHorasTrabalhadas = totalHorasTrabalhadas;
+	}
+	
+	
 
 }
